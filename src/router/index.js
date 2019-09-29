@@ -159,6 +159,19 @@ export const constantRoutes = [
     ]
   },
 
+  {
+    path: '/douban',
+    component: Layout,
+    name: '豆瓣',
+    children: [
+      {
+        path: 'books',
+        component: () => import('@/views/douban/books/index'),
+        meta: { title: '图书', icon: 'nested' }
+      }
+    ]
+  },
+
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
