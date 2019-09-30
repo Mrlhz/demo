@@ -149,25 +149,20 @@ export const constantRoutes = [
   },
 
   {
-    path: 'external-link',
-    component: Layout,
-    children: [
-      {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: 'External Link', icon: 'link' }
-      }
-    ]
-  },
-
-  {
     path: '/douban',
     component: Layout,
     name: '豆瓣',
+    meta: { title: '豆瓣', icon: 'nested' },
     children: [
       {
         path: 'books',
         component: () => import('@/views/douban/books/index'),
-        meta: { title: '图书', icon: 'nested' }
+        meta: { title: '图书', icon: 'books-1' }
+      },
+      {
+        path: 'movies',
+        component: () => import('@/views/douban/movies/index'),
+        meta: { title: '电影', icon: 'moviesel' }
       }
     ]
   },

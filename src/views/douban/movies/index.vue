@@ -13,11 +13,16 @@
           {{ scope.row.id }}
         </template>
       </el-table-column>
-      <el-table-column prop="title" label="书名" width="300" />
-      <el-table-column prop="isbn" label="ISBN" width="140" />
-      <el-table-column prop="pubdate" label="出版日期" width="180" />
-      <el-table-column prop="rating" label="评分" width="60" align="center" />
-      <el-table-column prop="series" label="简介" />
+      <el-table-column prop="title" label="名称" width="400" />
+      <el-table-column prop="year" label="年份" width="60" align="center" />
+      <el-table-column label="类型">
+        <template slot-scope="{row}">
+          <div class="tag-group">
+            <el-tag v-for="tag in row.genres" :key="tag" size="medium">{{ tag }}</el-tag>
+          </div>
+        </template>
+      </el-table-column>
+      <el-table-column prop="rating.average" label="评分" width="60" align="center" />
     </el-table>
     <pagination
       v-show="total > 0"
@@ -30,11 +35,11 @@
 </template>
 
 <script>
-import { getBook } from '@/api/book'
+import { getMovie } from '@/api/movie'
 import Pagination from '@/components/Pagination'
 
 export default {
-  name: 'Books',
+  name: 'Movies',
   components: { Pagination },
   data() {
     return {
@@ -54,8 +59,8 @@ export default {
   methods: {
     fetchData(params) {
       this.listLoading = true
-      const { books, total } = getBook(params)
-      this.list = books
+      const { movies, total } = getMovie(params)
+      this.list = movies
       this.total = total
       this.listLoading = false
     }
@@ -64,7 +69,7 @@ export default {
 </script>
 
 <style lang="scss">
-  .block {
-    padding: 15px 0;
+  .tag-group span{
+    margin-left: 5px;
   }
 </style>
